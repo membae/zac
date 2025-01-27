@@ -31,8 +31,17 @@ api=Api(app)
 
 class Home(Resource):
     def get(self):
-        return make_response({"msg":"wakili,a quick one"},200)
+        return make_response({"msg":"fb testing"},200)
 api.add_resource(Home,'/')
+
+class Details(Resource):
+    def get(self):
+        details=User.query.all()
+        if details:
+            return make_response([detail.to_dict() for detail in details],200)
+        return make_response({"msg":"no details found"},404)
+    
+api.add_resource(Details,'/details')    
 
 
 
