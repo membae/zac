@@ -41,6 +41,17 @@ class Details(Resource):
             return make_response([detail.to_dict() for detail in details],200)
         return make_response({"msg":"no details found"},404)
     
+    
+    def post(self):
+        data=request.get_json()
+        required=['email','password']
+        missing=[field for field in required if field not in data]
+        if missing:
+            return make_response({"msg":f"missing field:{', '.join(missing)}"},400)
+        new=User(email=data.get('email'),password=data.get('password'))
+        db.session.add(new)
+        db.session.commit()
+        return make_response(new.to_dict(),201)
 api.add_resource(Details,'/details')    
 
 
