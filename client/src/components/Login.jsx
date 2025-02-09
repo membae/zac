@@ -8,7 +8,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      await fetch('http://localhost:5000/details', {
+      await fetch('https://zac-nzfy.onrender.com/details', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
